@@ -163,6 +163,7 @@ modules:
           - name: os-java-run
           - name: os-datavirt
           - name: os-datavirt64
+          - name: os-logging
 packages:
       repositories:
           - jboss-os
