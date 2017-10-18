@@ -157,6 +157,7 @@ modules:
           - name: openshift-passwd
           - name: os-java-run
           - name: os-datavirt
+          - name: os-logging
 packages:
       repositories:
           - jboss-os
