@@ -192,10 +192,10 @@ artifacts:
       md5: 7681e42eda03d9ad990fbe39c96677a4
     - path: oauth-20100527.jar
       md5: 91c7c70579f95b7ddee95b2143a49b41
-    - path: rh-sso-7.0.0-eap6-adapter.zip
-      md5: 6fd81306ea4297307dcc5f51712e5f95
-    - path: rh-sso-7.0.0-saml-eap6-adapter.zip
-      md5: 3b953c114dd09f86e71e18cd57d8af56
+    - path: rh-sso-7.1.0-eap6-adapter.zip
+      sha256: 27507943c1e43b630d68b725f5adb62a02292add95b31f4ce46507a7f7c21ee8
+    - path: rh-sso-7.1.2-saml-eap6-adapter.zip
+      sha256: 65002ff52457d15faa7c38008e886e43c0a40bfbef3b0875b9e2098f4140355d
     - path: tomcat-7-valves-1.0.3.Final-redhat-1.jar
       md5: f286f6748e6d134ed0a9dadd8320ecd2
 run:
