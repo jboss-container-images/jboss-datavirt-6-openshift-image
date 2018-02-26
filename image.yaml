@@ -208,4 +208,4 @@ run:
 osbs:
       repository:
             name: jboss-datavirt-6-docker
-            branch: ce-1.0-openshift-datavirt-6.4-jdk-8-rhel-7
+            branch: jb-datavirt-6.4-openshift-rhel-7
