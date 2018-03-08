@@ -3,19 +3,20 @@
     "apiVersion": "v1",
     "metadata": {
         "annotations": {
-            "iconClass": "icon-jboss",
+            "iconClass": "icon-datavirt",
             "description": "Application template for JBoss Data Virtualization 6.4 services built using S2I.",
-            "tags": "jdv,datavirt,jboss,xpaas",
-            "version": "1.4.0",
-            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 (no SSL)"
+            "tags": "jdv,datavirt,database,jboss",
+            "version": "1.4.8",
+            "openshift.io/display-name": "JBoss Data Virtualization 6.4 (no SSL)",
+            "openshift.io/provider-display-name": "Red Hat, Inc."
         },
         "name": "datavirt64-basic-s2i"
     },
     "labels": {
         "template": "datavirt64-basic-s2i",
-        "xpaas": "1.4.0"
+        "xpaas": "1.4.8"
     },
-    "message": "A new data service has been created in your project.  The username/password for accessing the service is ${TEIID_USERNAME}/${TEIID_PASSWORD}.  Please be sure to create the \"${SERVICE_ACCOUNT_NAME}\" service account and the secret named ${CONFIGURATION_NAME} containing the datasource configuration details required by the deployed VDB(s).",
+    "message": "A new data service has been created in your project.  The username/password for accessing the service is ${TEIID_USERNAME}/${TEIID_PASSWORD}.  Please be sure to create the secret named ${CONFIGURATION_NAME} containing the datasource configuration details required by the deployed VDB(s).",
     "parameters": [
         {
             "description": "The name for the application.",
@@ -56,15 +57,8 @@
             "description": "Set this to the relative path to your project if it is not in the root of your repository.",
             "displayName": "Context Directory",
             "name": "CONTEXT_DIR",
-            "value": "datavirt64/dynamicvdb-datafederation/app",
+            "value": "datavirt/dynamicvdb-datafederation/app",
             "required": false
-        },
-        {
-            "description": "The name of the service account to use for the deployment.  The service account should be configured to allow usage of the secret specified by CONFIGURATION_NAME.",
-            "displayName": "Service Account Name",
-            "name": "SERVICE_ACCOUNT_NAME",
-            "value": "datavirt-service-account",
-            "required": true
         },
         {
             "description": "Username associated with Teiid data service.",
@@ -78,6 +72,22 @@
             "description": "Password for Teiid user.",
             "displayName": "Teiid User Password",
             "name": "TEIID_PASSWORD",
+            "from": "[\\a\\A]{8}[\\d]{1}[\\A]{1}",
+            "generate": "expression",
+            "required": true
+        },
+        {
+            "description": "Username associated with ModeShape.",
+            "displayName": "ModeShape Username",
+            "name": "MODESHAPE_USERNAME",
+            "from": "[\\a]{8}",
+            "generate": "expression",
+            "required": true
+        },
+        {
+            "description": "Password for ModeShape user.",
+            "displayName": "ModeShape User Password",
+            "name": "MODESHAPE_PASSWORD",
             "from": "[\\a\\A]{8}[\\d]{1}[\\A]{1}",
             "generate": "expression",
             "required": true
@@ -140,6 +150,12 @@
             "name": "ARTIFACT_DIR",
             "value": "",
             "required": false
+        },
+        {
+            "description": "Container memory limit",
+            "name": "MEMORY_LIMIT",
+            "value": "1Gi",
+            "required": false
         }
     ],
     "objects": [
@@ -157,6 +173,11 @@
                         "name": "jdbc",
                         "port": 31000,
                         "targetPort": "jdbc"
+                    },
+                    {
+                        "name": "odbc",
+                        "port": 35432,
+                        "targetPort": "odbc"
                     }
                 ],
                 "selector": {
@@ -170,6 +191,32 @@
                 },
                 "annotations": {
                     "description": "The data virtualization services."
+                }
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "spec": {
+                "clusterIP": "None",
+                "ports": [
+                    {
+                        "name": "ping",
+                        "port": 8888
+                    }
+                ],
+                "selector": {
+                    "deploymentConfig": "${APPLICATION_NAME}"
+                }
+            },
+            "metadata": {
+                "name": "${APPLICATION_NAME}-ping",
+                "labels": {
+                    "application": "${APPLICATION_NAME}"
+                },
+                "annotations": {
+                    "service.alpha.kubernetes.io/tolerate-unready-endpoints": "true",
+                    "description": "The JGroups ping port for clustering."
                 }
             }
         },
@@ -228,7 +275,7 @@
                             "from": {
                                 "kind": "ImageStreamTag",
                                 "namespace": "${IMAGE_STREAM_NAMESPACE}",
-                                "name": "jboss-datagrid71-client-openshift:1.0"
+                                "name": "jboss-datagrid71-client-openshift:1.1"
                             },
                             "paths": [
                                 {
@@ -296,7 +343,7 @@
                         "imageChange": {
                             "from": {
                                 "kind": "ImageStreamTag",
-                                "name": "jboss-datagrid71-client-openshift:1.0"
+                                "name": "jboss-datagrid71-client-openshift:1.1"
                             }
                         }
                     },
@@ -350,13 +397,17 @@
                         }
                     },
                     "spec": {
-                        "serviceAccountName": "${SERVICE_ACCOUNT_NAME}",
                         "terminationGracePeriodSeconds": 60,
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
                                 "image": "${APPLICATION_NAME}",
                                 "imagePullPolicy": "Always",
+                                "resources": {
+                                    "limits": {
+                                        "memory": "${MEMORY_LIMIT}"
+                                    }
+                                },
                                 "volumeMounts": [
                                     {
                                         "name": "configuration",
@@ -371,7 +422,8 @@
                                             "-c",
                                             "/opt/eap/bin/livenessProbe.sh"
                                         ]
-                                    }
+                                    },
+                                    "initialDelaySeconds": 60
                                 },
                                 "readinessProbe": {
                                     "exec": {
@@ -399,6 +451,11 @@
                                         "protocol": "TCP"
                                     },
                                     {
+                                        "name": "odbc",
+                                        "containerPort": 35432,
+                                        "protocol": "TCP"
+                                    },
+                                    {
                                         "name": "ping",
                                         "containerPort": 8888,
                                         "protocol": "TCP"
@@ -406,16 +463,16 @@
                                 ],
                                 "env": [
                                     {
-                                        "name": "OPENSHIFT_KUBE_PING_LABELS",
-                                        "value": "application=${APPLICATION_NAME}"
+                                        "name": "JGROUPS_PING_PROTOCOL",
+                                        "value": "openshift.DNS_PING"
                                     },
                                     {
-                                        "name": "OPENSHIFT_KUBE_PING_NAMESPACE",
-                                        "valueFrom": {
-                                            "fieldRef": {
-                                                "fieldPath": "metadata.namespace"
-                                            }
-                                        }
+                                        "name": "OPENSHIFT_DNS_PING_SERVICE_NAME",
+                                        "value": "${APPLICATION_NAME}-ping"
+                                    },
+                                    {
+                                        "name": "OPENSHIFT_DNS_PING_SERVICE_PORT",
+                                        "value": "8888"
                                     },
                                     {
                                         "name": "JGROUPS_CLUSTER_PASSWORD",
@@ -432,6 +489,14 @@
                                     {
                                         "name": "TEIID_PASSWORD",
                                         "value": "${TEIID_PASSWORD}"
+                                    },
+                                    {
+                                        "name": "MODESHAPE_USERNAME",
+                                        "value": "${MODESHAPE_USERNAME}"
+                                    },
+                                    {
+                                        "name": "MODESHAPE_PASSWORD",
+                                        "value": "${MODESHAPE_PASSWORD}"
                                     },
                                     {
                                         "name": "ENV_FILES",

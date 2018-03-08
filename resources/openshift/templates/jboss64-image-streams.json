@@ -26,20 +26,20 @@
             "spec": {
                 "tags": [
                     {
-                        "name": "1.0",
+                        "name": "1.1",
                         "annotations": {
                             "description": "JBoss Data Grid 7.1.2 Client Modules for EAP.",
                             "iconClass": "icon-datagrid",
                             "tags": "client,jboss,hidden",
-                            "version": "1.0",
+                            "version": "1.1",
                             "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2 Client Modules for EAP"
                         },
                         "from": {
                             "kind": "DockerImage",
-                            "name": "registry.access.redhat.com/jboss-datagrid-7/datagrid71-client-openshift"
+                            "name": "docker-registry.engineering.redhat.com/bdecoste/datagrid71-client-openshift:CLOUD-2136"
                             
                         }
-                    },
+                    }
 
                 ]
             }
@@ -74,7 +74,7 @@
                             "kind": "DockerImage",
                             "name": "docker-registry.engineering.redhat.com/vhalbert/datavirt64-openshift:CLOUD-2067"
                         }
-                    },
+                    }
   
                 ]
             }
@@ -96,13 +96,13 @@
             "spec": {
                 "tags": [
                     {
-                        "name": "1.0",
+                        "name": "1.2",
                         "annotations": {
                             "description": "JBoss Data Grid 7.1.2 S2I images.",
                             "iconClass": "icon-datagrid",
                             "tags": "datagrid,jboss,hidden",
                             "supports": "datagrid:7.1",
-                            "version": "1.0",
+                            "version": "1.2",
                             "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2"
                         },
                         "from": {
