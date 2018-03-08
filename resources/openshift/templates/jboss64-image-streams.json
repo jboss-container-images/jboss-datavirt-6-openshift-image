@@ -1,0 +1,152 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "jboss-image-streams",
+        "annotations": {
+            "description": "ImageStream definitions for JBoss Middleware products.",
+            "openshift.io/provider-display-name": "Red Hat, Inc."
+        }
+    },
+    "items": [
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-datagrid71-client-openshift",
+                "annotations": {
+                    "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2 Client Modules for EAP",
+                    "openshift.io/provider-display-name": "Red Hat, Inc.",
+                    "version": "1.4.8"
+                }
+            },
+            "labels": {
+                "xpaas": "1.4.8"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "1.1",
+                        "annotations": {
+                            "description": "JBoss Data Grid 7.1.2 Client Modules for EAP.",
+                            "iconClass": "icon-datagrid",
+                            "tags": "client,jboss,hidden",
+                            "version": "1.1",
+                            "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2 Client Modules for EAP"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.engineering.redhat.com/bdecoste/datagrid71-client-openshift:CLOUD-2136"
+                            
+                        }
+                    }
+
+                ]
+            }
+        },
+ {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-datavirt64-openshift",
+                "annotations": {
+                    "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4",
+                    "openshift.io/provider-display-name": "Red Hat, Inc.",
+                    "version": "1.4.8"
+                }
+            },
+            "labels": {
+                "xpaas": "1.4.8"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "1.0",
+                        "annotations": {
+                            "description": "Red Hat JBoss Data Virtualization 6.4 S2I images.",
+                            "iconClass": "icon-datavirt",
+                            "tags": "datavirt,jboss,hidden",
+                            "supports": "datavirt:6.4",
+                            "version": "1.0",
+                            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.engineering.redhat.com/vhalbert/datavirt64-openshift:CLOUD-2067"
+                        }
+                    }
+  
+                ]
+            }
+        }, 
+      {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-datagrid71-openshift",
+                "annotations": {
+                    "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2",
+                    "openshift.io/provider-display-name": "Red Hat, Inc.",
+                    "version": "1.4.8"
+                }
+            },
+            "labels": {
+                "xpaas": "1.4.8"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "1.2",
+                        "annotations": {
+                            "description": "JBoss Data Grid 7.1.2 S2I images.",
+                            "iconClass": "icon-datagrid",
+                            "tags": "datagrid,jboss,hidden",
+                            "supports": "datagrid:7.1",
+                            "version": "1.2",
+                            "openshift.io/display-name": "Red Hat JBoss Data Grid 7.1.2"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "docker-registry.engineering.redhat.com/ooliveir/datagrid71-openshift:CLOUD-2136"
+                        }
+                    }
+                ]
+            }
+        },        
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-datavirt64-driver-openshift",
+                "annotations": {
+                    "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP",
+                    "openshift.io/provider-display-name": "Red Hat, Inc.",
+                    "version": "1.4.8"
+                }
+            },
+            "labels": {
+                "xpaas": "1.4.8"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "1.0",
+                        "annotations": {
+                            "description": "JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP.",
+                            "iconClass": "icon-datavirt",
+                            "tags": "client,jboss,hidden",
+                            "version": "1.0",
+                            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "registry.access.redhat.com/jboss-datavirt-6/datavirt64-driver-openshift:1.0"
+                        }
+                    }
+                ]
+            }
+        }
+
+    ]
+}
+
