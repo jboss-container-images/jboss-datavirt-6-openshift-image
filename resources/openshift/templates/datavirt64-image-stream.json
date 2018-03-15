@@ -39,7 +39,7 @@
                             "kind": "DockerImage",
                             "name": "registry.access.redhat.com/jboss-datavirt-6/datavirt64-openshift:1.0"
                         }
-                    },
+                    }
   
                 ]
             }
