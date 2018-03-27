@@ -2,9 +2,9 @@
     "kind": "List",
     "apiVersion": "v1",
     "metadata": {
-        "name": "datavirt64-image-stream.json",
+        "name": "datavirt64-dsb-image-stream.json",
         "annotations": {
-            "description": "ImageStream definitions for JBoss Middleware products.",
+            "description": "ImageStream definitions for JBoss Data Virtualization Middleware products.",
             "openshift.io/provider-display-name": "Red Hat, Inc."
         }
     },
@@ -72,6 +72,39 @@
                         "from": {
                             "kind": "DockerImage",
                             "name": "registry.access.redhat.com/jboss-datavirt-6/datavirt64-driver-openshift:1.0"
+                        }
+                    }
+                ]
+            }
+        }, 
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-datavirt64-dsb-openshift",
+                "annotations": {
+                    "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 Data Services Builder",
+                    "openshift.io/provider-display-name": "Red Hat, Inc.",
+                    "version": "1.0.0"
+                }
+            },
+            "labels": {
+                "jdv64": "1.0.0"
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "1.0",
+                        "annotations": {
+                            "description": "JBoss Data Virtualization 6.4 Data Services Builder.",
+                            "iconClass": "icon-datavirt",
+                            "tags": "datavirt,jboss,hidden",
+                            "version": "1.0.0",
+                            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 Data Services Builder"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "registry.access.redhat.com/jboss-datavirt-6/datavirt64-dsb-openshift:1.0"
                         }
                     }
                 ]
