@@ -1,0 +1,10 @@
+modules:
+      repositories:
+          - git:
+                  url: https://github.com/jboss-openshift/cct_module.git
+                  ref: sprint-15
+
+osbs:
+      repository:
+            name: containers/jboss-datavirt-6
+            branch: jb-datavirt-6.4-openshift-cp-rhel-7
