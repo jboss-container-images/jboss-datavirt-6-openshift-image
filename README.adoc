@@ -5,3 +5,10 @@ NOTE: Extends link:https://github.com/jboss-container-images/jboss-datavirt-6-im
 # License
 
 See link:LICENSE[LICENSE] file.
+
+
+To create and/or update the documents associated with the templates, run the gen_template_docs.py python script.
+
+Notes:
+
+- Currently, a document doesn't get created for the image-stream.json file.
