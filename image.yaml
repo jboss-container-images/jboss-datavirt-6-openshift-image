@@ -3,7 +3,7 @@ schema_version: 1
 name: "jboss-datavirt-6/datavirt64-openshift"
 description: "Red Hat JBoss Data Virtualization 6 for OpenShift container image"
 version: "1.0"
-from: "jboss-datavirt-6/datavirt64:latest"
+from: "jboss-datavirt-6/datavirt64:6.4.1-3"
 labels:
     - name: "com.redhat.component"
       value: "jboss-datavirt-6-datavirt64-openshift-container"
@@ -91,10 +91,10 @@ ports:
     - value: 31443
 modules:
       repositories:
-     	 - git:
+        - git:
                url: https://github.com/jboss-openshift/cct_module.git
                ref: master
-     	 - git:
+        - git:
                url: https://github.com/jboss-container-images/jboss-jdv-modules.git
                ref: master
       install:
