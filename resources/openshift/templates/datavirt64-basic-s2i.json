@@ -272,22 +272,7 @@
                         "uri": "${SOURCE_REPOSITORY_URL}",
                         "ref": "${SOURCE_REPOSITORY_REF}"
                     },
-                    "contextDir": "${CONTEXT_DIR}",
-                    "images": [
-                        {
-                            "from": {
-                                "kind": "ImageStreamTag",
-                                "namespace": "${IMAGE_STREAM_NAMESPACE}",
-                                "name": "jboss-datagrid71-client-openshift:1.0"
-                            },
-                            "paths": [
-                                {
-                                    "destinationDir": "./${CONTEXT_DIR}/extensions/datagrid71",
-                                    "sourcePath": "/extensions/."
-                                }
-                            ]
-                        }
-                    ]
+                    "contextDir": "${CONTEXT_DIR}"
                 },
                 "strategy": {
                     "type": "Source",
@@ -341,16 +326,7 @@
                         "type": "ImageChange",
                         "imageChange": {}
                     },
-                    {
-                        "type": "ImageChange",
-                        "imageChange": {
-                            "from": {
-                                "kind": "ImageStreamTag",
-                                "name": "jboss-datagrid71-client-openshift:1.0"
-                            }
-                        }
-                    },
-                    {
+                     {
                         "type": "ConfigChange"
                     }
                 ]
