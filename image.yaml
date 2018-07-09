@@ -93,7 +93,7 @@ modules:
       repositories:
         - git:
                url: https://github.com/jboss-openshift/cct_module.git
-               ref: sprint-20
+               ref: master
         - git:
                url: https://github.com/jboss-container-images/jboss-jdv-modules.git
                ref: master
