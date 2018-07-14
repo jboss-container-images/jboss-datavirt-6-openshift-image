@@ -91,14 +91,14 @@ ports:
     - value: 31443
 modules:
       repositories:
-          - name: cct_module
-            git:
-                  url: https://github.com/jboss-openshift/cct_module.git
-                  ref: master 
-          - name: jboss-jdv-modules
-            git:
-                  url: https://github.com/jboss-container-images/jboss-jdv-modules.git
-                  ref: master
+        - name: cct_module
+          git:
+               url: https://github.com/jboss-openshift/cct_module.git
+               ref: master
+        - name: jboss-jdv-modules
+          git:
+               url: https://github.com/jboss-container-images/jboss-jdv-modules.git
+               ref: master
       install:
           - name: dynamic-resources
           - name: s2i-common
