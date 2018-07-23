@@ -17,14 +17,16 @@ import re
 from collections import OrderedDict
 from ptemplate.template import Template
 
+#GIT_REPO = "https://github.com/jboss-container-images/jboss-datavirt-6-openshift-image.git"
 GIT_REPO = "https://github.com/jboss-container-images/jboss-datavirt-6-openshift-image.git"
+
 REPO_NAME = "jboss-datavirt-6-openshift-image/"
 TEMPLATE_DOCS = "resources/openshift/docs"
 APPLICATION_DIRECTORIES = ("datavirt")
 template_dirs = ['resources/openshift/templates']
 amq_ssl_desc = None
 
-LINKS =  {"jboss-datavirt64-openshift:1.0": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
+LINKS =  {"jboss-datavirt64-openshift:1.1": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
 }
 
 PARAMETER_VALUES = {"APPLICATION_DOMAIN": "secure-app.test.router.default.local", \
