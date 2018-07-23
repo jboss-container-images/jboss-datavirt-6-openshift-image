@@ -44,6 +44,28 @@ https://docs.openshift.org/latest/architecture/core_concepts/templates.html#para
 |`TEIID_PASSWORD` | `TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}` | True
 |`MODESHAPE_USERNAME` | `MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}` | True
 |`MODESHAPE_PASSWORD` | `MODESHAPE_PASSWORD` | Password for ModeShape user. | `${MODESHAPE_PASSWORD}` | True
+|`AUTH_LDAP_URL` | `AUTH_LDAP_URL` | LDAP Endpoint to connect for authentication, example: ldap://myldap.example.com | `${AUTH_LDAP_URL}` | False
+|`AUTH_LDAP_BIND_DN` | `AUTH_LDAP_BIND_DN` | Bind DN used for authentication, example: uid=admin,ou=users,ou=exmample,ou=com | `${AUTH_LDAP_BIND_DN}` | False
+|`AUTH_LDAP_BIND_CREDENTIAL` | `AUTH_LDAP_BIND_CREDENTIAL` | LDAP Credentials used for authentication | `${AUTH_LDAP_BIND_CREDENTIAL}` | False
+|`AUTH_LDAP_JAAS_SECURITY_DOMAIN` | `AUTH_LDAP_JAAS_SECURITY_DOMAIN` | The JMX ObjectName of the JaasSecurityDomain used to decrypt the password | `${AUTH_LDAP_JAAS_SECURITY_DOMAIN}` | False
+|`AUTH_LDAP_BASE_CTX_DN` | `AUTH_LDAP_BASE_CTX_DN` | LDAP Base DN of the top-level context to begin the user search | `${AUTH_LDAP_BASE_CTX_DN}` | False
+|`AUTH_LDAP_BASE_FILTER` | `AUTH_LDAP_BASE_FILTER` | LDAP search filter used to locate the context of the user to authenticate. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. A common example for the search filter is (uid={0}) | `${AUTH_LDAP_BASE_FILTER}` | False
+|`AUTH_LDAP_SEARCH_SCOPE` | `AUTH_LDAP_SEARCH_SCOPE` | The search scope to use | `${AUTH_LDAP_SEARCH_SCOPE}` | False
+|`AUTH_LDAP_SEARCH_TIME_LIMIT` | `AUTH_LDAP_SEARCH_TIME_LIMIT` | The timeout in milliseconds for user or role searches, example: 10000 | `${AUTH_LDAP_SEARCH_TIME_LIMIT}` | False
+|`AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE` | `AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE` | The name of the attribute in the user entry that contains the DN of the user.  This maybe necessary if the DN of the user itself contains special characters, backslash for example, that prevent correct user mapping.  If the attribute does not exist, the entrys DN is used. | `${AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE}` | False
+|`AUTH_LDAP_PARSE_USERNAME` | `AUTH_LDAP_PARSE_USERNAME` | A flag indicating if the DN is to be parsed for the username. If set to true, the DN is parsed for the username. If set to false the DN is not parsed for the username. This option is used together with usernameBeginString and usernameEndString. | `${AUTH_LDAP_PARSE_USERNAME}` | False
+|`AUTH_LDAP_USERNAME_BEGIN_STRING` | `AUTH_LDAP_USERNAME_BEGIN_STRING` | Defines the String which is to be removed from the start of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true. | `${AUTH_LDAP_USERNAME_BEGIN_STRING}` | False
+|`AUTH_LDAP_USERNAME_END_STRING` | `AUTH_LDAP_USERNAME_END_STRING` | Defines the String which is to be removed from the end of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true. | `${AUTH_LDAP_USERNAME_END_STRING}` | False
+|`AUTH_LDAP_ROLE_ATTRIBUTE_ID` | `AUTH_LDAP_ROLE_ATTRIBUTE_ID` | Name of the attribute containing the user roles. | `${AUTH_LDAP_ROLE_ATTRIBUTE_ID}` | False
+|`AUTH_LDAP_ROLES_CTX_DN` | `AUTH_LDAP_ROLES_CTX_DN` | The fixed DN of the context to search for user roles. This is not the DN where the actual roles are, but the DN where the objects containing the user roles are. For example, in a Microsoft Active Directory server, this is the DN where the user account is.  Example: ou=groups,ou=example,ou=com | `${AUTH_LDAP_ROLES_CTX_DN}` | False
+|`AUTH_LDAP_ROLE_FILTER` | `AUTH_LDAP_ROLE_FILTER` | A search filter used to locate the roles associated with the authenticated user. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. The authenticated userDN is substituted into the filter anywhere a {1} is used. An example search filter that matches on the input username is (member={0}). An alternative that matches on the authenticated userDN is (member={1}). | `${AUTH_LDAP_ROLE_FILTER}` | False
+|`AUTH_LDAP_ROLE_RECURSION` | `AUTH_LDAP_ROLE_RECURSION` | The number of levels of recursion the role search will go below a matching context. Disable recursion by setting this to 0. | `${AUTH_LDAP_ROLE_RECURSION}` | False
+|`AUTH_LDAP_DEFAULT_ROLE` | `AUTH_LDAP_DEFAULT_ROLE` | A role included for all authenticated users | `${AUTH_LDAP_DEFAULT_ROLE}` | False
+|`AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID` | `AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID` | Name of the attribute within the roleCtxDN context which contains the role name.  If the roleAttributeIsDN property is set to true, this property is used to find the role objects name attribute. | `${AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID}` | False
+|`AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN` | `AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN` | A flag indicating if the DN returned by a query contains the roleNameAttributeID. If set to true, the DN is checked for the roleNameAttributeID. If set to false, the DN is not checked for the roleNameAttributeID. This flag can improve the performance of LDAP queries. | `${AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN}` | False
+|`AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN` | `AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN` | Whether or not the roleAttributeID contains the fully-qualified DN of a role object. If false, the role name is taken from the value of the roleNameAttributeId attribute of the context name. Certain directory schemas, such as Microsoft Active Directory, require this attribute to be set to true. | `${AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN}` | False
+|`AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK` | `AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK` | If you are not using referrals, this option can be ignored. When using referrals, this option denotes the attribute name which contains users defined for a certain role, for example member, if the role object is inside the referral. Users are checked against the content of this attribute name. If this option is not set, the check will always fail, so role objects cannot be stored in a referral tree. | `${AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK}` | False
+|`AUTH_LDAP_ALLOW_EMPTY_PASSWORDS` | -- | Whether to allow empty passwords. Most LDAP servers treat empty passwords as anonymous login attempts. To reject empty passwords, set this to false.  | -- | False
 |`GITHUB_WEBHOOK_SECRET` | -- | A secret string used to configure the GitHub webhook. | secret101 | True
 |`GENERIC_WEBHOOK_SECRET` | -- | A secret string used to configure the Generic webhook. | secret101 | True
 |`IMAGE_STREAM_NAMESPACE` | -- | Namespace in which the ImageStreams for Red Hat Middleware images are installed. These ImageStreams are normally installed in the openshift namespace. You should only need to modify this if you've installed the ImageStreams in a different namespace/project. | openshift | True
@@ -118,7 +140,7 @@ for more information.
 | S2I image  | link | Build output | BuildTriggers and Settings
 
 |`${EXTENSIONS_DOCKERFILE}` |  | `${APPLICATION_NAME}-ext:latest` | GitHub, Generic, ConfigChange
-|jboss-datavirt64-openshift:1.0 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ImageChange, ImageChange, ConfigChange
+|jboss-datavirt64-openshift:1.2 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ImageChange, ConfigChange
 |=============
 
 
@@ -204,7 +226,7 @@ for more information.
 |=======================================================================
 |Deployment |Variable name |Description |Example value
 
-.25+| `${APPLICATION_NAME}`
+.46+| `${APPLICATION_NAME}`
 |`JGROUPS_PING_PROTOCOL` | -- | openshift.DNS_PING
 |`OPENSHIFT_DNS_PING_SERVICE_NAME` | -- | `${APPLICATION_NAME}-ping`
 |`OPENSHIFT_DNS_PING_SERVICE_PORT` | -- | 8888
@@ -224,6 +246,27 @@ for more information.
 |`TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}`
 |`MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}`
 |`MODESHAPE_PASSWORD` | Password for ModeShape user. | `${MODESHAPE_PASSWORD}`
+|`AUTH_LDAP_URL` | LDAP Endpoint to connect for authentication, example: ldap://myldap.example.com | `${AUTH_LDAP_URL}`
+|`AUTH_LDAP_BIND_DN` | Bind DN used for authentication, example: uid=admin,ou=users,ou=exmample,ou=com | `${AUTH_LDAP_BIND_DN}`
+|`AUTH_LDAP_BIND_CREDENTIAL` | LDAP Credentials used for authentication | `${AUTH_LDAP_BIND_CREDENTIAL}`
+|`AUTH_LDAP_JAAS_SECURITY_DOMAIN` | The JMX ObjectName of the JaasSecurityDomain used to decrypt the password | `${AUTH_LDAP_JAAS_SECURITY_DOMAIN}`
+|`AUTH_LDAP_BASE_CTX_DN` | LDAP Base DN of the top-level context to begin the user search | `${AUTH_LDAP_BASE_CTX_DN}`
+|`AUTH_LDAP_BASE_FILTER` | LDAP search filter used to locate the context of the user to authenticate. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. A common example for the search filter is (uid={0}) | `${AUTH_LDAP_BASE_FILTER}`
+|`AUTH_LDAP_SEARCH_SCOPE` | The search scope to use | `${AUTH_LDAP_SEARCH_SCOPE}`
+|`AUTH_LDAP_SEARCH_TIME_LIMIT` | The timeout in milliseconds for user or role searches, example: 10000 | `${AUTH_LDAP_SEARCH_TIME_LIMIT}`
+|`AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE` | The name of the attribute in the user entry that contains the DN of the user.  This maybe necessary if the DN of the user itself contains special characters, backslash for example, that prevent correct user mapping.  If the attribute does not exist, the entrys DN is used. | `${AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE}`
+|`AUTH_LDAP_PARSE_USERNAME` | A flag indicating if the DN is to be parsed for the username. If set to true, the DN is parsed for the username. If set to false the DN is not parsed for the username. This option is used together with usernameBeginString and usernameEndString. | `${AUTH_LDAP_PARSE_USERNAME}`
+|`AUTH_LDAP_USERNAME_BEGIN_STRING` | Defines the String which is to be removed from the start of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true. | `${AUTH_LDAP_USERNAME_BEGIN_STRING}`
+|`AUTH_LDAP_USERNAME_END_STRING` | Defines the String which is to be removed from the end of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true. | `${AUTH_LDAP_USERNAME_END_STRING}`
+|`AUTH_LDAP_ROLE_ATTRIBUTE_ID` | Name of the attribute containing the user roles. | `${AUTH_LDAP_ROLE_ATTRIBUTE_ID}`
+|`AUTH_LDAP_ROLES_CTX_DN` | The fixed DN of the context to search for user roles. This is not the DN where the actual roles are, but the DN where the objects containing the user roles are. For example, in a Microsoft Active Directory server, this is the DN where the user account is.  Example: ou=groups,ou=example,ou=com | `${AUTH_LDAP_ROLES_CTX_DN}`
+|`AUTH_LDAP_ROLE_FILTER` | A search filter used to locate the roles associated with the authenticated user. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. The authenticated userDN is substituted into the filter anywhere a {1} is used. An example search filter that matches on the input username is (member={0}). An alternative that matches on the authenticated userDN is (member={1}). | `${AUTH_LDAP_ROLE_FILTER}`
+|`AUTH_LDAP_ROLE_RECURSION` | The number of levels of recursion the role search will go below a matching context. Disable recursion by setting this to 0. | `${AUTH_LDAP_ROLE_RECURSION}`
+|`AUTH_LDAP_DEFAULT_ROLE` | A role included for all authenticated users | `${AUTH_LDAP_DEFAULT_ROLE}`
+|`AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID` | Name of the attribute within the roleCtxDN context which contains the role name.  If the roleAttributeIsDN property is set to true, this property is used to find the role objects name attribute. | `${AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID}`
+|`AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN` | A flag indicating if the DN returned by a query contains the roleNameAttributeID. If set to true, the DN is checked for the roleNameAttributeID. If set to false, the DN is not checked for the roleNameAttributeID. This flag can improve the performance of LDAP queries. | `${AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN}`
+|`AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN` | Whether or not the roleAttributeID contains the fully-qualified DN of a role object. If false, the role name is taken from the value of the roleNameAttributeId attribute of the context name. Certain directory schemas, such as Microsoft Active Directory, require this attribute to be set to true. | `${AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN}`
+|`AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK` | If you are not using referrals, this option can be ignored. When using referrals, this option denotes the attribute name which contains users defined for a certain role, for example member, if the role object is inside the referral. Users are checked against the content of this attribute name. If this option is not set, the check will always fail, so role objects cannot be stored in a referral tree. | `${AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK}`
 |`ENV_FILES` | -- | `/etc/datavirt-environment/*`
 |`DATAVIRT_TRANSPORT_KEYSTORE` | -- | `${HTTPS_KEYSTORE}`
 |`DATAVIRT_TRANSPORT_KEYSTORE_TYPE` | -- | `${HTTPS_KEYSTORE_TYPE}`

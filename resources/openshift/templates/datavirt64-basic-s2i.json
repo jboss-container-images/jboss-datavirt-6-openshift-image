@@ -5,7 +5,7 @@
         "annotations": {
             "iconClass": "icon-datavirt",
             "tags": "jdv,datavirt,database,jboss",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "openshift.io/display-name": "JBoss Data Virtualization 6.4 (no SSL)",
             "openshift.io/provider-display-name": "Red Hat, Inc.",
             "description": "Application template for JBoss Data Virtualization 6.4 services built using S2I.",
@@ -17,7 +17,7 @@
     },
     "labels": {
         "template": "datavirt64-basic-s2i",
-        "jdv64": "1.0.0"
+        "jdv64": "1.2.0"
     },
     "message": "A new data service has been created in your project.  The username/password for accessing the service is ${TEIID_USERNAME}/${TEIID_PASSWORD}.  Please be sure to create the secret named ${CONFIGURATION_NAME} containing the datasource configuration details required by the deployed VDB(s).",
     "parameters": [
@@ -95,6 +95,138 @@
             "generate": "expression",
             "required": true
         },
+        {
+            "description": "LDAP Endpoint to connect for authentication, example: ldap://myldap.example.com",
+            "displayName": "LDAP Endpoint",
+            "name": "AUTH_LDAP_URL",
+            "required": false
+        },
+        {
+            "description": "Bind DN used for authentication, example: uid=admin,ou=users,ou=exmample,ou=com",
+            "displayName": "LDAP Bind DN",
+            "name": "AUTH_LDAP_BIND_DN",
+            "required": false
+        },
+        {
+            "description": "LDAP Credentials used for authentication",
+            "displayName": "LDAP Bind Credentials",
+            "name": "AUTH_LDAP_BIND_CREDENTIAL",
+            "required": false
+        },
+        {
+            "description": "The JMX ObjectName of the JaasSecurityDomain used to decrypt the password",
+            "displayName": "LDAP JAAS Security Domain",
+            "name": "AUTH_LDAP_JAAS_SECURITY_DOMAIN",
+            "required": false
+        },
+        {
+            "description": "LDAP Base DN of the top-level context to begin the user search",
+            "displayName": "LDAP Base DN",
+            "name": "AUTH_LDAP_BASE_CTX_DN",
+            "required": false
+        },
+        {
+            "description": "LDAP search filter used to locate the context of the user to authenticate. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. A common example for the search filter is (uid={0})",
+            "displayName": "LDAP Base Search filter",
+            "name": "AUTH_LDAP_BASE_FILTER",
+            "required": false
+        },
+        {
+            "description": "The search scope to use",
+            "displayName": "LDAP Search scope",
+            "name": "AUTH_LDAP_SEARCH_SCOPE",
+            "required": false
+        },
+        {
+            "description": "The timeout in milliseconds for user or role searches, example: 10000",
+            "displayName": "LDAP Search time limit",
+            "name": "AUTH_LDAP_SEARCH_TIME_LIMIT",
+            "required": false
+        },
+        {
+            "description": "The name of the attribute in the user entry that contains the DN of the user.  This maybe necessary if the DN of the user itself contains special characters, backslash for example, that prevent correct user mapping.  If the attribute does not exist, the entrys DN is used.",
+            "displayName": "LDAP DN attribute",
+            "name": "AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE",
+            "required": false
+        },
+        {
+            "description": "A flag indicating if the DN is to be parsed for the username. If set to true, the DN is parsed for the username. If set to false the DN is not parsed for the username. This option is used together with usernameBeginString and usernameEndString.",
+            "displayName": "LDAP Parse username",
+            "name": "AUTH_LDAP_PARSE_USERNAME",
+            "required": false
+        },
+        {
+            "description": "Defines the String which is to be removed from the start of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true.",
+            "displayName": "LDAP Username begin string",
+            "name": "AUTH_LDAP_USERNAME_BEGIN_STRING",
+            "required": false
+        },
+        {
+            "description": "Defines the String which is to be removed from the end of the DN to reveal the username. This option is used together with usernameEndString and only taken into account if parseUsername is set to true.",
+            "displayName": "LDAP Username end string",
+            "name": "AUTH_LDAP_USERNAME_END_STRING",
+            "required": false
+        },
+        {
+            "description": "Name of the attribute containing the user roles.",
+            "displayName": "LDAP Role attributeID",
+            "name": "AUTH_LDAP_ROLE_ATTRIBUTE_ID",
+            "required": false
+        },
+        {
+            "description": "The fixed DN of the context to search for user roles. This is not the DN where the actual roles are, but the DN where the objects containing the user roles are. For example, in a Microsoft Active Directory server, this is the DN where the user account is.  Example: ou=groups,ou=example,ou=com",
+            "displayName": "LDAP Roles Search DN",
+            "name": "AUTH_LDAP_ROLES_CTX_DN",
+            "required": false
+        },
+        {
+            "description": "A search filter used to locate the roles associated with the authenticated user. The input username or userDN obtained from the login module callback is substituted into the filter anywhere a {0} expression is used. The authenticated userDN is substituted into the filter anywhere a {1} is used. An example search filter that matches on the input username is (member={0}). An alternative that matches on the authenticated userDN is (member={1}).",
+            "displayName": "LDAP Role search filter",
+            "name": "AUTH_LDAP_ROLE_FILTER",
+            "required": false
+        },
+        {
+            "description": "The number of levels of recursion the role search will go below a matching context. Disable recursion by setting this to 0.",
+            "displayName": "LDAP Role recursion",
+            "name": "AUTH_LDAP_ROLE_RECURSION",
+            "required": false
+        },
+        {
+            "description": "A role included for all authenticated users",
+            "displayName": "LDAP Default role",
+            "name": "AUTH_LDAP_DEFAULT_ROLE",
+            "required": false
+        },
+        {
+            "description": "Name of the attribute within the roleCtxDN context which contains the role name.  If the roleAttributeIsDN property is set to true, this property is used to find the role objects name attribute.",
+            "displayName": "LDAP Role name attribute ID",
+            "name": "AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID",
+            "required": false
+        },   
+        {
+            "description": "A flag indicating if the DN returned by a query contains the roleNameAttributeID. If set to true, the DN is checked for the roleNameAttributeID. If set to false, the DN is not checked for the roleNameAttributeID. This flag can improve the performance of LDAP queries.",
+            "displayName": "LDAP Role DN contains roleNameAttributeID",
+            "name": "AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN",
+            "required": false
+        },
+        {
+            "description": "Whether or not the roleAttributeID contains the fully-qualified DN of a role object. If false, the role name is taken from the value of the roleNameAttributeId attribute of the context name. Certain directory schemas, such as Microsoft Active Directory, require this attribute to be set to true.",
+            "displayName": "LDAP Role Attribute ID is DN",
+            "name": "AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN",
+            "required": false
+        },
+        {
+            "description": "If you are not using referrals, this option can be ignored. When using referrals, this option denotes the attribute name which contains users defined for a certain role, for example member, if the role object is inside the referral. Users are checked against the content of this attribute name. If this option is not set, the check will always fail, so role objects cannot be stored in a referral tree.",
+            "displayName": "LDAP Referral user attribute ID",
+            "name": "AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK",
+            "required": false
+        }, 
+        {
+            "description": "Whether to allow empty passwords. Most LDAP servers treat empty passwords as anonymous login attempts. To reject empty passwords, set this to false. ",
+            "displayName": "Allow Empty Passwords",
+            "name": "AUTH_LDAP_ALLOW_EMPTY_PASSWORDS",
+            "required": false
+        },                        
         {
             "description": "A secret string used to configure the GitHub webhook.",
             "displayName": "Github Webhook Secret",
@@ -281,7 +413,7 @@
                         "from": {
                             "kind": "ImageStreamTag",
                             "namespace": "${IMAGE_STREAM_NAMESPACE}",
-                            "name": "jboss-datavirt64-openshift:1.0"
+                            "name": "jboss-datavirt64-openshift:1.2"
                         },
                         "env": [
                             {
@@ -476,6 +608,90 @@
                                     {
                                         "name": "MODESHAPE_PASSWORD",
                                         "value": "${MODESHAPE_PASSWORD}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_URL",
+                                        "value": "${AUTH_LDAP_URL}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_BIND_DN",
+                                        "value": "${AUTH_LDAP_BIND_DN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_BIND_CREDENTIAL",
+                                        "value": "${AUTH_LDAP_BIND_CREDENTIAL}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_JAAS_SECURITY_DOMAIN",
+                                        "value": "${AUTH_LDAP_JAAS_SECURITY_DOMAIN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_BASE_CTX_DN",
+                                        "value": "${AUTH_LDAP_BASE_CTX_DN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_BASE_FILTER",
+                                        "value": "${AUTH_LDAP_BASE_FILTER}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_SEARCH_SCOPE",
+                                        "value": "${AUTH_LDAP_SEARCH_SCOPE}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_SEARCH_TIME_LIMIT",
+                                        "value": "${AUTH_LDAP_SEARCH_TIME_LIMIT}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE",
+                                        "value": "${AUTH_LDAP_DISTINGUISHED_NAME_ATTRIBUTE}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_PARSE_USERNAME",
+                                        "value": "${AUTH_LDAP_PARSE_USERNAME}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_USERNAME_BEGIN_STRING",
+                                        "value": "${AUTH_LDAP_USERNAME_BEGIN_STRING}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_USERNAME_END_STRING",
+                                        "value": "${AUTH_LDAP_USERNAME_END_STRING}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLE_ATTRIBUTE_ID",
+                                        "value": "${AUTH_LDAP_ROLE_ATTRIBUTE_ID}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLES_CTX_DN",
+                                        "value": "${AUTH_LDAP_ROLES_CTX_DN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLE_FILTER",
+                                        "value": "${AUTH_LDAP_ROLE_FILTER}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLE_RECURSION",
+                                        "value": "${AUTH_LDAP_ROLE_RECURSION}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_DEFAULT_ROLE",
+                                        "value": "${AUTH_LDAP_DEFAULT_ROLE}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID",
+                                        "value": "${AUTH_LDAP_ROLE_NAME_ATTRIBUTE_ID}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN",
+                                        "value": "${AUTH_LDAP_PARSE_ROLE_NAME_FROM_DN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN",
+                                        "value": "${AUTH_LDAP_ROLE_ATTRIBUTE_IS_DN}"
+                                    },
+                                    {
+                                        "name": "AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK",
+                                        "value": "${AUTH_LDAP_REFERRAL_USER_ATTRIBUTE_ID_TO_CHECK}"
                                     },
                                     {
                                         "name": "ENV_FILES",

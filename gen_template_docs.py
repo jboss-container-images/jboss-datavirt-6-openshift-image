@@ -19,12 +19,12 @@ from ptemplate.template import Template
 
 GIT_REPO = "https://github.com/jboss-container-images/jboss-datavirt-6-openshift-image.git"
 REPO_NAME = "jboss-datavirt-6-openshift-image/"
-TEMPLATE_DOCS = "resources/openshift/docs"
+TEMPLATE_DOCS = "resources/openshift/docs/"
 APPLICATION_DIRECTORIES = ("datavirt")
 template_dirs = ['resources/openshift/templates']
 amq_ssl_desc = None
 
-LINKS =  {"jboss-datavirt64-openshift:1.0": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
+LINKS =  {"jboss-datavirt64-openshift:1.2": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
 }
 
 PARAMETER_VALUES = {"APPLICATION_DOMAIN": "secure-app.test.router.default.local", \
@@ -285,7 +285,7 @@ fullname = {
 
 def generate_readme():
     """Generates a README page for the template documentation."""
-    with open('docs/README.adoc','w') as fh:
+    with open('./docs/README.adoc','w') as fh:
         fh.write(autogen_warning)
         # page header
         fh.write(open('./docs/README.adoc.in').read())
