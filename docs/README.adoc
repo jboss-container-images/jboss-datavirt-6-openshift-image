@@ -19,6 +19,7 @@ toc::[levels=1]
 * link:./resources/openshift/templates/datavirt64-basic-s2i.adoc[datavirt64-basic-s2i]
 * link:./resources/openshift/templates/datavirt64-extensions-support-s2i.adoc[datavirt64-extensions-support-s2i]
 * link:./resources/openshift/templates/datavirt64-image-stream.adoc[datavirt64-image-stream]
+* link:./resources/openshift/templates/datavirt64-ldap-s2i.adoc[datavirt64-ldap-s2i]
 * link:./resources/openshift/templates/datavirt64-secure-s2i.adoc[datavirt64-secure-s2i]
 
 ////
