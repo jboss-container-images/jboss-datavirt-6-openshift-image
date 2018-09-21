@@ -1,8 +1,13 @@
 modules:
       repositories:
-          - git:
+          - name: cct_module
+            git:
                   url: https://github.com/jboss-openshift/cct_module.git
-                  ref: sprint-15
+                  ref: sprint-23
+          - name: jboss-jdv-modules
+            git:
+                  url: https://github.com/jboss-container-images/jboss-jdv-modules.git
+                  ref: sprint-23
 
 osbs:
       repository:
