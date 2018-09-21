@@ -91,9 +91,11 @@ ports:
     - value: 31443
 modules:
       repositories:
-          - git:
+          - name: cct_module
+            git:
                   url: https://github.com/jboss-openshift/cct_module.git
                   ref: master
+
       install:
           - name: dynamic-resources
           - name: s2i-common
