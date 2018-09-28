@@ -9,7 +9,7 @@
         }
     },
     "items": [
- {
+        {
             "kind": "ImageStream",
             "apiVersion": "v1",
             "metadata": {
@@ -61,7 +61,6 @@
                             "name": "registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.2"
                         }
                     },
-                
                     {
                         "name": "1.1",
                         "annotations": {
@@ -98,10 +97,9 @@
                             "name": "registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.0"
                         }
                     }
-  
                 ]
             }
-        }, 
+        },
         {
             "kind": "ImageStream",
             "apiVersion": "v1",
@@ -189,7 +187,5 @@
                 ]
             }
         }
-
     ]
 }
-
