@@ -26,7 +26,7 @@ APPLICATION_DIRECTORIES = ("datavirt")
 template_dirs = ['resources/openshift/templates']
 amq_ssl_desc = None
 
-LINKS =  {"jboss-datavirt64-openshift:1.3": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
+LINKS =  {"jboss-datavirt64-openshift:1.4": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
 }
 
 PARAMETER_VALUES = {"APPLICATION_DOMAIN": "secure-app.test.router.default.local", \
