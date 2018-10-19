@@ -4,12 +4,12 @@
     generator or the input template (./*.in)
 ////
 
-= datavirt64-ldap-s2i
+= datavirt64-basic-s2i
 :toc:
 :toc-placement!:
 :toclevels: 5
 
-Application template for JBoss Data Virtualization 6.4 services that configures security domain using S2I.
+Application template for JBoss Data Virtualization 6.4 services built using S2I.
 
 toc::[]
 
@@ -25,7 +25,6 @@ https://docs.openshift.org/latest/architecture/core_concepts/templates.html#para
 
 |`APPLICATION_NAME` | -- | The name for the application. | datavirt-app | True
 |`CONFIGURATION_NAME` | -- | The name of the secret containing configuration properties for the data sources. | datavirt-app-config | True
-|`CONFIG_SECURITY_DOMAIN_NAME` | -- | The name of the secret containing security domain configuration properties. | datavirt-security-config | False
 |`HOSTNAME_HTTP` | -- | Specify a custom hostname for the http route.  Leave blank to use default hostname, e.g.: <service-name>-<project>.<default-domain-suffix> | -- | False
 |`SOURCE_REPOSITORY_URL` | -- | The URL of the repository with your application source code. | https://github.com/jboss-openshift/openshift-quickstarts | True
 |`SOURCE_REPOSITORY_REF` | -- | Set this to a branch name, tag or other ref of your repository if you are not using the default branch. | master | False
@@ -191,7 +190,7 @@ for more information.
 |`TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}`
 |`MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}`
 |`MODESHAPE_PASSWORD` | Password for ModeShape user. | `${MODESHAPE_PASSWORD}`
-|`ENV_FILES` | -- | `/etc/datavirt-environment/*,/etc/datavirt-security-environment/*`
+|`ENV_FILES` | -- | `/etc/datavirt-environment/*`
 |=======================================================================
 
 
