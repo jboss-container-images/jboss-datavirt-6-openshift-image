@@ -132,6 +132,7 @@ modules:
           - name: os-datavirt64
           - name: os-logging
 packages:
+      content_sets_file: content_sets.yml
       repositories:
           - jboss-os
           - jboss-rhscl
@@ -151,6 +152,8 @@ run:
       cmd:
           - "/opt/eap/bin/openshift-launch.sh"
 osbs:
+      configuration:
+            container_file: container.yaml
       repository:
             name: containers/jboss-datavirt-6
             branch: jb-datavirt-6.4-openshift-rhel-7
