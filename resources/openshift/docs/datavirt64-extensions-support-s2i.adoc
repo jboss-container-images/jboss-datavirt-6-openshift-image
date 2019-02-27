@@ -118,7 +118,7 @@ for more information.
 | S2I image  | link | Build output | BuildTriggers and Settings
 
 |`${EXTENSIONS_DOCKERFILE}` |  | `${APPLICATION_NAME}-ext:latest` | GitHub, Generic, ConfigChange
-|jboss-datavirt64-openshift:1.4 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ImageChange, ConfigChange
+|jboss-datavirt64-openshift:1.5 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ImageChange, ConfigChange
 |=============
 
 
