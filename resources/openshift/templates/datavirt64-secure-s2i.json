@@ -78,10 +78,25 @@
             "required": false
         },
         {
-            "description": "The name of the service account to use for the deployment.  The service account should be configured to allow usage of the secret(s) specified by CONFIGURATION_NAME, HTTPS_SECRET and JGROUPS_ENCRYPT_SECRET.",
-            "displayName": "Service Account Name",
-            "name": "SERVICE_ACCOUNT_NAME",
-            "value": "datavirt-service-account",
+            "displayName": "Queues",
+            "description": "Queue names",
+            "name": "HORNETQ_QUEUES",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "Topics",
+            "description": "Topic names",
+            "name": "HORNETQ_TOPICS",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "HornetQ Password",
+            "description": "HornetQ cluster admin password",
+            "name": "HORNETQ_CLUSTER_PASSWORD",
+            "from": "[a-zA-Z0-9]{8}",
+            "generate": "expression",
             "required": true
         },
         {
@@ -697,6 +712,18 @@
                                         "name": "OPENSHIFT_DNS_PING_SERVICE_PORT",
                                         "value": "8888"
                                     },
+                                    {
+                                        "name": "HORNETQ_CLUSTER_PASSWORD",
+                                        "value": "${HORNETQ_CLUSTER_PASSWORD}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_QUEUES",
+                                        "value": "${HORNETQ_QUEUES}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_TOPICS",
+                                        "value": "${HORNETQ_TOPICS}"
+                                    },                                    
                                     {
                                         "name": "HTTPS_KEYSTORE_DIR",
                                         "value": "/etc/datavirt-secret-volume"
