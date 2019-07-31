@@ -78,6 +78,28 @@
             "required": false
         },
         {
+            "displayName": "Queues",
+            "description": "Queue names",
+            "name": "HORNETQ_QUEUES",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "Topics",
+            "description": "Topic names",
+            "name": "HORNETQ_TOPICS",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "HornetQ Password",
+            "description": "HornetQ cluster admin password",
+            "name": "HORNETQ_CLUSTER_PASSWORD",
+            "from": "[a-zA-Z0-9]{8}",
+            "generate": "expression",
+            "required": true
+        },
+        {
             "description": "The name of the secret containing the keystore to be used for serving secure content.",
             "displayName": "Server Keystore Secret Name",
             "name": "HTTPS_SECRET",
@@ -124,22 +146,6 @@
             "description": "Password for Teiid user.",
             "displayName": "Teiid User Password",
             "name": "TEIID_PASSWORD",
-            "from": "[\\a\\A]{8}[\\d]{1}[\\A]{1}",
-            "generate": "expression",
-            "required": true
-        },
-        {
-            "description": "Username associated with ModeShape.",
-            "displayName": "ModeShape Username",
-            "name": "MODESHAPE_USERNAME",
-            "from": "[\\a]{8}",
-            "generate": "expression",
-            "required": true
-        },
-        {
-            "description": "Password for ModeShape user.",
-            "displayName": "ModeShape User Password",
-            "name": "MODESHAPE_PASSWORD",
             "from": "[\\a\\A]{8}[\\d]{1}[\\A]{1}",
             "generate": "expression",
             "required": true
@@ -764,6 +770,18 @@
                                         "value": "8888"
                                     },
                                     {
+                                        "name": "HORNETQ_CLUSTER_PASSWORD",
+                                        "value": "${HORNETQ_CLUSTER_PASSWORD}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_QUEUES",
+                                        "value": "${HORNETQ_QUEUES}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_TOPICS",
+                                        "value": "${HORNETQ_TOPICS}"
+                                    },                                    
+                                    {
                                         "name": "HTTPS_KEYSTORE_DIR",
                                         "value": "/etc/datavirt-secret-volume"
                                     },
@@ -818,14 +836,6 @@
                                     {
                                         "name": "TEIID_PASSWORD",
                                         "value": "${TEIID_PASSWORD}"
-                                    },
-                                    {
-                                        "name": "MODESHAPE_USERNAME",
-                                        "value": "${MODESHAPE_USERNAME}"
-                                    },
-                                    {
-                                        "name": "MODESHAPE_PASSWORD",
-                                        "value": "${MODESHAPE_PASSWORD}"
                                     },
                                     {
                                         "name": "ENV_FILES",
