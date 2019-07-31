@@ -78,6 +78,28 @@
             "required": false
         },
         {
+            "displayName": "Queues",
+            "description": "Queue names",
+            "name": "HORNETQ_QUEUES",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "Topics",
+            "description": "Topic names",
+            "name": "HORNETQ_TOPICS",
+            "value": "",
+            "required": false
+        },
+        {
+            "displayName": "HornetQ Password",
+            "description": "HornetQ cluster admin password",
+            "name": "HORNETQ_CLUSTER_PASSWORD",
+            "from": "[a-zA-Z0-9]{8}",
+            "generate": "expression",
+            "required": true
+        },
+        {
             "description": "The URL of the repository with source code for the extensions image.  The image should have all modules, etc., placed in the \"/extensions/\" directory in the image.  If the contents are in a different directory, the sourcePath for the ImageSource in the BuildConfig must be modified.",
             "displayName": "Extensions Git Repository URL",
             "name": "EXTENSIONS_REPOSITORY_URL",
@@ -667,6 +689,18 @@
                                         }
                                     },
                                     {
+                                        "name": "HORNETQ_CLUSTER_PASSWORD",
+                                        "value": "${HORNETQ_CLUSTER_PASSWORD}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_QUEUES",
+                                        "value": "${HORNETQ_QUEUES}"
+                                    },
+                                    {
+                                        "name": "HORNETQ_TOPICS",
+                                        "value": "${HORNETQ_TOPICS}"
+                                    },                                    
+                                    {
                                         "name": "HTTPS_KEYSTORE_DIR",
                                         "value": "/etc/datavirt-secret-volume"
                                     },
@@ -721,14 +755,6 @@
                                     {
                                         "name": "TEIID_PASSWORD",
                                         "value": "${TEIID_PASSWORD}"
-                                    },
-                                    {
-                                        "name": "MODESHAPE_USERNAME",
-                                        "value": "${MODESHAPE_USERNAME}"
-                                    },
-                                    {
-                                        "name": "MODESHAPE_PASSWORD",
-                                        "value": "${MODESHAPE_PASSWORD}"
                                     },
                                     {
                                         "name": "ENV_FILES",
