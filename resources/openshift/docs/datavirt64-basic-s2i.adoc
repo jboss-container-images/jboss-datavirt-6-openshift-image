@@ -29,6 +29,9 @@ https://docs.openshift.org/latest/architecture/core_concepts/templates.html#para
 |`SOURCE_REPOSITORY_URL` | -- | The URL of the repository with your application source code. | https://github.com/jboss-openshift/openshift-quickstarts | True
 |`SOURCE_REPOSITORY_REF` | -- | Set this to a branch name, tag or other ref of your repository if you are not using the default branch. | master | False
 |`CONTEXT_DIR` | -- | Set this to the relative path to your project if it is not in the root of your repository. | datavirt64/dynamicvdb-datafederation/app | False
+|`HORNETQ_QUEUES` | -- | Queue names  | -- | False
+|`HORNETQ_TOPICS` | -- | Topic names | -- | False
+|`HORNETQ_CLUSTER_PASSWORD` | `HORNETQ_CLUSTER_PASSWORD` | HornetQ cluster admin password | `${HORNETQ_CLUSTER_PASSWORD}` | True
 |`TEIID_USERNAME` | `TEIID_USERNAME` | Username associated with Teiid data service. | `${TEIID_USERNAME}` | True
 |`TEIID_PASSWORD` | `TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}` | True
 |`MODESHAPE_USERNAME` | `MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}` | True
@@ -184,6 +187,9 @@ for more information.
 |`JGROUPS_PING_PROTOCOL` | -- | openshift.DNS_PING
 |`OPENSHIFT_DNS_PING_SERVICE_NAME` | -- | `${APPLICATION_NAME}-ping`
 |`OPENSHIFT_DNS_PING_SERVICE_PORT` | -- | 8888
+|`HORNETQ_CLUSTER_PASSWORD` | HornetQ cluster admin password | `${HORNETQ_CLUSTER_PASSWORD}`
+|`HORNETQ_QUEUES` | Queue names | `${HORNETQ_QUEUES}`
+|`HORNETQ_TOPICS` | Topic names | `${HORNETQ_TOPICS}`
 |`JGROUPS_CLUSTER_PASSWORD` | Password used by JGroups to authenticate nodes in the cluster. | `${JGROUPS_CLUSTER_PASSWORD}`
 |`AUTO_DEPLOY_EXPLODED` | Controls whether exploded deployment content should be automatically deployed | `${AUTO_DEPLOY_EXPLODED}`
 |`TEIID_USERNAME` | Username associated with Teiid data service. | `${TEIID_USERNAME}`
