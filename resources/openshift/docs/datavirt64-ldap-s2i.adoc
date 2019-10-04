@@ -30,13 +30,11 @@ https://docs.openshift.org/latest/architecture/core_concepts/templates.html#para
 |`SOURCE_REPOSITORY_URL` | -- | The URL of the repository with your application source code. | https://github.com/jboss-openshift/openshift-quickstarts | True
 |`SOURCE_REPOSITORY_REF` | -- | Set this to a branch name, tag or other ref of your repository if you are not using the default branch. | master | False
 |`CONTEXT_DIR` | -- | Set this to the relative path to your project if it is not in the root of your repository. | datavirt64/dynamicvdb-datafederation/app | False
-|`HORNETQ_QUEUES` | -- | Queue names  | -- | False
-|`HORNETQ_TOPICS` | -- | Topic names | -- | False
+|`HORNETQ_QUEUES` | `HORNETQ_QUEUES` | Queue names | `${HORNETQ_QUEUES}` | False
+|`HORNETQ_TOPICS` | `HORNETQ_TOPICS` | Topic names | `${HORNETQ_TOPICS}` | False
 |`HORNETQ_CLUSTER_PASSWORD` | `HORNETQ_CLUSTER_PASSWORD` | HornetQ cluster admin password | `${HORNETQ_CLUSTER_PASSWORD}` | True
 |`TEIID_USERNAME` | `TEIID_USERNAME` | Username associated with Teiid data service. | `${TEIID_USERNAME}` | True
 |`TEIID_PASSWORD` | `TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}` | True
-|`MODESHAPE_USERNAME` | `MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}` | True
-|`MODESHAPE_PASSWORD` | `MODESHAPE_PASSWORD` | Password for ModeShape user. | `${MODESHAPE_PASSWORD}` | True
 |`GITHUB_WEBHOOK_SECRET` | -- | A secret string used to configure the GitHub webhook. | secret101 | True
 |`GENERIC_WEBHOOK_SECRET` | -- | A secret string used to configure the Generic webhook. | secret101 | True
 |`IMAGE_STREAM_NAMESPACE` | -- | Namespace in which the ImageStreams for Red Hat Middleware images are installed. These ImageStreams are normally installed in the openshift namespace. You should only need to modify this if you've installed the ImageStreams in a different namespace/project. | openshift | True
@@ -101,7 +99,7 @@ for more information.
 |=============
 | S2I image  | link | Build output | BuildTriggers and Settings
 
-|jboss-datavirt64-openshift:1.6 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ConfigChange
+|jboss-datavirt64-openshift:1.7 |  link:../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`] | `${APPLICATION_NAME}:latest` | GitHub, Generic, ImageChange, ConfigChange
 |=============
 
 
@@ -184,7 +182,7 @@ for more information.
 |=======================================================================
 |Deployment |Variable name |Description |Example value
 
-.10+| `${APPLICATION_NAME}`
+.11+| `${APPLICATION_NAME}`
 |`JGROUPS_PING_PROTOCOL` | -- | openshift.DNS_PING
 |`OPENSHIFT_DNS_PING_SERVICE_NAME` | -- | `${APPLICATION_NAME}-ping`
 |`OPENSHIFT_DNS_PING_SERVICE_PORT` | -- | 8888
@@ -195,8 +193,6 @@ for more information.
 |`AUTO_DEPLOY_EXPLODED` | Controls whether exploded deployment content should be automatically deployed | `${AUTO_DEPLOY_EXPLODED}`
 |`TEIID_USERNAME` | Username associated with Teiid data service. | `${TEIID_USERNAME}`
 |`TEIID_PASSWORD` | Password for Teiid user. | `${TEIID_PASSWORD}`
-|`MODESHAPE_USERNAME` | Username associated with ModeShape. | `${MODESHAPE_USERNAME}`
-|`MODESHAPE_PASSWORD` | Password for ModeShape user. | `${MODESHAPE_PASSWORD}`
 |`ENV_FILES` | -- | `/etc/datavirt-environment/*,/etc/datavirt-security-environment/*`
 |=======================================================================
 
