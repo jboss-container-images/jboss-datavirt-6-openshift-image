@@ -17,14 +17,32 @@
                 "annotations": {
                     "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4",
                     "openshift.io/provider-display-name": "Red Hat, Inc.",
-                    "version": "1.6.0"
+                    "version": "1.7.0"
                 }
             },
             "labels": {
-                "jdv64": "1.6.0"
+                "jdv64": "1.7.0"
             },
             "spec": {
                 "tags": [
+                    {
+                        "name": "1.7",
+                        "annotations": {
+                            "description": "Red Hat JBoss Data Virtualization 6.4 S2I images.",
+                            "iconClass": "icon-datavirt",
+                            "tags": "datavirt,jboss,hidden",
+                            "supports": "datavirt:6.4",
+                            "version": "1.7.0",
+                            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4"
+                        },
+                        "referencePolicy": {
+                            "type": "Local"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.7"
+                        }
+                    }, 
                     {
                         "name": "1.6",
                         "annotations": {
@@ -164,14 +182,31 @@
                 "annotations": {
                     "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP",
                     "openshift.io/provider-display-name": "Red Hat, Inc.",
-                    "version": "1.6.0"
+                    "version": "1.7.0"
                 }
             },
             "labels": {
-                "jdv64": "1.6.0"
+                "jdv64": "1.7.0"
             },
             "spec": {
                 "tags": [
+                    {
+                        "name": "1.7",
+                        "annotations": {
+                            "description": "JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP.",
+                            "iconClass": "icon-datavirt",
+                            "tags": "client,jboss,hidden",
+                            "version": "1.7.0",
+                            "openshift.io/display-name": "Red Hat JBoss Data Virtualization 6.4 JDBC Driver Modules for EAP"
+                        },
+                        "referencePolicy": {
+                            "type": "Local"
+                        },
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.7"
+                        }
+                    },
                     {
                         "name": "1.6",
                         "annotations": {

@@ -6,8 +6,8 @@
 #       repository, then translating information from template JSON files into 
 #       template asciidoctor files, and stores them in the a directory(Specified by
 #       TEMPLATE_DOCS variable).
-# 
-# Notes: NEEDS TO BE CLEANED UP
+#
+# dependencies: pip install ptemplate
 
 import json
 import yaml
@@ -17,7 +17,6 @@ import re
 from collections import OrderedDict
 from ptemplate.template import Template
 
-#GIT_REPO = "https://github.com/jboss-container-images/jboss-datavirt-6-openshift-image.git"
 GIT_REPO = "https://github.com/jboss-container-images/jboss-datavirt-6-openshift-image.git"
 
 REPO_NAME = "jboss-datavirt-6-openshift-image/"
@@ -26,8 +25,7 @@ APPLICATION_DIRECTORIES = ("datavirt")
 template_dirs = ['resources/openshift/templates']
 amq_ssl_desc = None
 
-LINKS =  {"jboss-datavirt64-openshift:1.6": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]",
-}
+LINKS =  {"jboss-datavirt64-openshift:1.7": "../../datavirt/datavirt-openshift{outfilesuffix}[`jboss-datavirt-6/datavirt64-openshift`]" }
 
 PARAMETER_VALUES = {"APPLICATION_DOMAIN": "secure-app.test.router.default.local", \
                    "SOURCE_REPOSITORY_URL": "https://github.com/jboss-openshift/openshift-examples.git", \
@@ -60,7 +58,7 @@ def generate_template(path):
             outfile = re.sub('templates', 'docs', re.sub('.json$', '.adoc', path) ) 
         else:
             data = yaml.load(data_file)
-            outfile = re.sub('tempates', 'docs', re.sub('.yaml$', '.adoc', path) )
+            outfile = re.sub('templates', 'docs', re.sub('.yaml$', '.adoc', path) )
 
     if not 'labels' in data or not "template" in data["labels"]:
         sys.stderr.write("no template label for template %s, can't generate documentation\n"%path)
