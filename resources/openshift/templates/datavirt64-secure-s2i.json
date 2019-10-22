@@ -19,7 +19,7 @@
         "template": "datavirt64-secure-s2i",
         "jdv64": "1.7.0"
     },
-    "message": "A new data service has been created in your project.  The username/password for accessing the service is ${TEIID_USERNAME}/${TEIID_PASSWORD}.  Please be sure to create the \"${SERVICE_ACCOUNT_NAME}\" service account and the following secrets: \"${CONFIGURATION_NAME}\" containing the datasource configuration details required by the deployed VDB(s); \"${HTTPS_SECRET}\" containing the ${HTTPS_KEYSTORE} file used for serving secure content; \"${JGROUPS_ENCRYPT_SECRET}\" containing the ${JGROUPS_ENCRYPT_KEYSTORE} file used for securing JGroups communications.",
+    "message": "A new data service has been created in your project.  The username/password for accessing the service is ${TEIID_USERNAME}/${TEIID_PASSWORD}.  Please be sure to create the following secrets: \"${CONFIGURATION_NAME}\" containing the datasource configuration details required by the deployed VDB(s); \"${HTTPS_SECRET}\" containing the ${HTTPS_KEYSTORE} file used for serving secure content; \"${JGROUPS_ENCRYPT_SECRET}\" containing the ${JGROUPS_ENCRYPT_KEYSTORE} file used for securing JGroups communications.",
     "parameters": [
         {
             "description": "The name for the application.",
@@ -377,6 +377,12 @@
             "name": "ARTIFACT_DIR",
             "value": "",
             "required": false
+        },
+        {
+            "description": "Container memory limit",
+            "name": "MEMORY_LIMIT",
+            "value": "1Gi",
+            "required": false
         }
     ],
     "objects": [
@@ -404,6 +410,16 @@
                         "name": "jdbcs",
                         "port": 31443,
                         "targetPort": "jdbcs"
+                    },
+                    {
+                        "name": "odbc",
+                        "port": 35432,
+                        "targetPort": "odbc"
+                    },
+                    {
+                        "name": "odbcs",
+                        "port": 35443,
+                        "targetPort": "odbcs"
                     }
                 ],
                 "selector": {
@@ -417,6 +433,32 @@
                 },
                 "annotations": {
                     "description": "The data virtualization services."
+                }
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "spec": {
+                "clusterIP": "None",
+                "ports": [
+                    {
+                        "name": "ping",
+                        "port": 8888
+                    }
+                ],
+                "selector": {
+                    "deploymentConfig": "${APPLICATION_NAME}"
+                }
+            },
+            "metadata": {
+                "name": "${APPLICATION_NAME}-ping",
+                "labels": {
+                    "application": "${APPLICATION_NAME}"
+                },
+                "annotations": {
+                    "service.alpha.kubernetes.io/tolerate-unready-endpoints": "true",
+                    "description": "The JGroups ping port for clustering."
                 }
             }
         },
@@ -625,13 +667,17 @@
                         }
                     },
                     "spec": {
-                        "serviceAccountName": "${SERVICE_ACCOUNT_NAME}",
                         "terminationGracePeriodSeconds": 60,
                         "containers": [
                             {
                                 "name": "${APPLICATION_NAME}",
                                 "image": "${APPLICATION_NAME}",
                                 "imagePullPolicy": "Always",
+                                "resources": {
+                                    "limits": {
+                                        "memory": "${MEMORY_LIMIT}"
+                                    }
+                                },
                                 "volumeMounts": [
                                     {
                                         "name": "configuration",
@@ -656,7 +702,8 @@
                                             "-c",
                                             "/opt/eap/bin/livenessProbe.sh"
                                         ]
-                                    }
+                                    },
+                                    "initialDelaySeconds": 60
                                 },
                                 "readinessProbe": {
                                     "exec": {
@@ -691,6 +738,16 @@
                                     {
                                         "name": "jdbcs",
                                         "containerPort": 31443,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "name": "odbc",
+                                        "containerPort": 35432,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "name": "odbcs",
+                                        "containerPort": 35443,
                                         "protocol": "TCP"
                                     },
                                     {
