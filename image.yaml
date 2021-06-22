@@ -3,7 +3,7 @@ schema_version: 1
 name: "jboss-datavirt-6/datavirt64-openshift"
 description: "Red Hat JBoss Data Virtualization 6 for OpenShift container image"
 version: "1.7"
-from: "jboss-datavirt-6/datavirt64:6.4.8-5"
+from: "jboss-datavirt-6/datavirt64:6.4.8-12"
 labels:
     - name: "com.redhat.component"
       value: "jboss-datavirt-6-datavirt64-openshift-container"
